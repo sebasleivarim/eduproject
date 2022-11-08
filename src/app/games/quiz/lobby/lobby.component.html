@@ -1,0 +1,82 @@
+<game-layout-column [reverse]="true">
+    <div gameColumn="one">
+        <div class="manage">
+            <div class="manage__row">
+                <brand-card>
+                    <h2>Crear pregunta</h2>
+
+                    <form [formGroup]="questionForm" *ngIf="availableRounds.length; else noRounds" (submit)="saveQuestion()">
+
+                        <brand-dropdown label="Ronda" placeholder="Seleccione una ronda" formControlName="round" [options]="availableRounds"></brand-dropdown>
+
+                        <brand-dropdown label="Tipo" placeholder="Seleccione un tipo" formControlName="type" [options]="availableTypes"></brand-dropdown>
+
+                        <span *ngIf="questionForm.get('type').value.id =='image'; else standardQuestion">
+                            <brand-label description="(image should include any text for the question)">Image URL</brand-label>
+                            <brand-input   type="text" formControlName="text" placeholder="http://url-of-the-image"></brand-input>
+                        </span>
+                        <ng-template #standardQuestion><brand-input  label="Pregunta" type="textarea" formControlName="text"></brand-input></ng-template>
+
+                        <brand-label description="Ingrese las opciones disponibles que se pueden elegir para responder la pregunta, se requiere un mínimo de 2 opciones y un máximo de 8.">Opciones</brand-label>
+                        <div formArrayName="choices" *ngFor="let option of formOptions.controls; let i = index">
+                            <div class="choices" [formGroupName]="i">
+                                <brand-input [prefix]="i + 1" formControlName="text"></brand-input>
+                                <brand-toggle formControlName="correct"></brand-toggle>
+                                <div>
+                                    <button brand-button-warning (click)="removeOption(i)" [disabled]="formOptions.length <= 2">
+                                        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button brand-button-plain type="button" (click)="addOption()" [disabled]="formOptions.length >= 8">Adicionar opción</button>
+                            <button brand-button type="submit" [disabled]="this.questionForm.pristine || this.questionForm.invalid">Guardar pregunta</button>
+                        </div>
+
+                    </form>
+
+                    <ng-template #noRounds>Cree una o más rondas para habilitar la adición de preguntas.</ng-template>
+                </brand-card>
+            </div>
+
+            <div class="manage__row">
+                <brand-card>
+                    <h2>Crear ronda</h2>
+
+                    <form [formGroup]="roundForm" (submit)="saveRound()">
+
+                        <brand-input label="Nombre" formControlName="title"></brand-input>
+
+                        <brand-input label="Descripción" type="textarea" formControlName="description"></brand-input>
+
+                        <div class="actions">
+                            <button brand-button type="submit" [disabled]="this.roundForm.pristine || this.roundForm.invalid">Crear</button>
+                        </div>
+
+                    </form>
+                </brand-card>
+            </div>
+        </div>
+    </div>
+
+    <div gameColumn="two">
+        <brand-card>
+            <h2>Vista general</h2>
+
+            <div class="round-list" *ngFor="let round of rounds">
+                <div class="round-list__item">
+                    <brand-expansion label="{{ round.title }} ({{ round.questionList | count }})" (onToggle)="loadQuestions(round)">
+                        <ng-container *ngIf="round.questions; else noQuestions">
+                            <div class="question" *ngFor="let question of round.questions">
+                                {{ question.text | slice: 0: 30 }}<span *ngIf="question.text.length > 50">....{{ question.text | slice: -10 }}</span>
+                            </div>
+                        </ng-container>
+                        <ng-template #noQuestions>No questions</ng-template>
+                    </brand-expansion>
+                </div>
+            </div>
+        </brand-card>
+    </div>
+</game-layout-column>

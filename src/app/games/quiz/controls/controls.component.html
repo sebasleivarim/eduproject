@@ -1,0 +1,31 @@
+<brand-card>
+    <h2>Controles de anfitrión</h2>
+    <div class="controls">
+        <div class="controls__overview">
+            <div>Como anfitrión usted guiará el juego, puede participar si quiere....</div>
+        </div>
+        <div class="controls__actions">
+            <ng-container [ngSwitch]="next">
+                <ng-container *ngSwitchCase="'START'">
+                    <button brand-button (click)="empezarQuiz()">Empezar</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'QUESTION'">
+                    <button brand-button (click)="siguientePregunta()">Siguiene pregunta</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'CALCULATE'">
+                    <button brand-button (click)="terminarRonda()" [disabled]="waiting">Final ronda</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'ROUND'">
+                    <button brand-button (click)="siguienteRonda()" [disabled]="waiting">Siguiente ronda</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'FINISH'">
+                    <button brand-button (click)="terminarQuiz()" [disabled]="waiting">Final Quiz</button>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</brand-card>

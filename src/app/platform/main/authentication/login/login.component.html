@@ -1,0 +1,17 @@
+<h2>Iniciar sesión</h2>
+
+<form [formGroup]="loginForm" (submit)="login()">
+    <brand-input label="Usuario (Email)" name="email" type="email" formControlName="email"></brand-input>
+
+    <brand-input label="Contraseña" name="password" type="password" formControlName="password"></brand-input>
+
+    <button brand-button type="submit" [disabled]="loginForm.pristine || loginForm.invalid || sending">Ingresar</button>
+
+    <brand-notification *ngIf="error" severity="error">
+        <div brandNotificationMessage>{{ error }}</div>
+    </brand-notification>
+</form>
+
+<div class="actions">
+    <a [routerLink]="['/', 'auth', 'register']">Crear cuenta</a>
+</div>

@@ -1,0 +1,21 @@
+<h2>Crear cuenta</h2>
+
+<p style="font-size: 0.8em">Tenga en cuenta que la longitud mínima de la contraseña es de 8 caracteres.</p>
+
+<form [formGroup]="registerForm" (submit)="crearCuenta()" autocomplete="off">
+    <brand-input label="Usuario (Email)" name="email" type="email" formControlName="email"></brand-input>
+
+    <brand-input label="Alias" name="displayName" type="text" formControlName="displayName"></brand-input>
+
+    <brand-input label="Contraseña" name="password" type="password" formControlName="password"></brand-input>
+
+    <button brand-button type="submit" [disabled]="registerForm.pristine || registerForm.invalid || sending">Registrar</button>
+
+    <brand-notification *ngIf="error" severity="error">
+        <div brandNotificationMessage>{{ error }}</div>
+    </brand-notification>
+</form>
+
+<div class="actions">
+    <a [routerLink]="['/', 'auth', 'login']">Regresar a iniciar sesión</a>
+</div>

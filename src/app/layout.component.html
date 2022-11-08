@@ -1,0 +1,26 @@
+<div class="layout">
+    <header>
+        <div class="title">
+            <a [routerLink]="['/']">
+                <img src="/assets/logo.jpg" alt="Code Mortals Logo">
+            </a>
+            <div>
+                <div>Poyecto educación</div>
+                <h1 style="font-size: 0.8em;">La Gamificación como estrategia para favorecer el proceso de aprendizaje</h1>
+            </div>
+        </div>
+        <div class="user">
+            <game-account *gameAuthenticated="true"></game-account>
+            <a brand-button *gameAuthenticated="false" [routerLink]="['/', 'auth', 'login']">Registrarte / Iniciar sesión</a>
+        </div>
+    </header>
+
+    <div>
+        <game-verify *gameVerified="false"></game-verify>
+        <router-outlet></router-outlet>
+    </div>
+
+    <footer>
+       <span style="color: white;">La Gamificación como estrategia para favorecer el proceso de aprendizaje</span>
+    </footer>
+</div>

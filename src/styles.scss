@@ -1,0 +1,133 @@
+@import '../_variables';
+
+html, body {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 7px;
+    color: $brand-dark-color;
+
+    @media all and (min-width: $tablet-viewport) {
+        font-size: 8px;
+    }
+
+    @media all and (min-width: $desktop-viewport) {
+        font-size: 9px;
+    }
+
+    @media all and (min-width: $workstation-viewport) {
+        font-size: 10px;
+    }
+}
+
+@import '../_typography';
+@import '../_layout';
+
+body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    font-size: 2rem;
+    background-color: $brand-light-color;
+    background-image: url(/assets/background.jpg);
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: blur(20px);
+    animation: blur-background 6s infinite cubic-bezier(0.7, 0, 0.7, 0);
+    animation-iteration-count: 1
+
+}
+
+section {
+    + section {
+        margin-top: 2em;
+    }
+}
+
+a {
+    color: $brand-primary;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+p {
+    margin: 0.5em 0;
+}
+
+table {
+    margin: 1em 0;
+    background-color: transparentize($brand-primary-dark, 0.9);
+
+    tr {
+        :first-child {
+            width: 15%;
+            min-width: 8em;
+        }
+    }
+
+    th, td {
+        padding: 0.25em 0.375em;
+    }
+
+    th {
+        text-align: start;
+        white-space: nowrap;
+        font-weight: 700;
+    }
+
+    td {
+        min-width: 20%;
+    }
+
+    thead {
+        tr {
+            background-color: transparentize($brand-primary-dark, 0.5);
+        }
+    }
+
+    tbody {
+        > :nth-child(odd) {
+            background-color: transparentize($brand-primary-dark, 0.8);
+        }
+    }
+}
+
+button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+blockquote {
+    margin: 0.5em 0;
+    padding-left: 0.5em;
+    border-left: 4px solid $brand-primary;
+}
+
+/* ANIMATIONS */
+@keyframes blur-background {
+    from {
+        backdrop-filter: blur(0);
+    }
+    to {
+        backdrop-filter: blur(20px);
+    }
+}

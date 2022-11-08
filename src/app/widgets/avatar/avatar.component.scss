@@ -1,0 +1,18 @@
+@import '../../../../_variables';
+
+.widget-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0.125em;
+    border: 1px solid $brand-light-color;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}

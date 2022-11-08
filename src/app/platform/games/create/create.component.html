@@ -1,0 +1,12 @@
+<brand-card>
+    <h2>Crear juego</h2>
+
+    <form [formGroup]="gameForm" (submit)="crearJuego()">
+        <brand-input label="Nombre" type="text" formControlName="name"></brand-input>
+
+        <div class="actions">
+            <button brand-button-warning (click)="cancel()">Cancelar</button>
+            <button brand-button type="submit" [disabled]="gameForm.pristine || gameForm.invalid">Crear</button>
+        </div>
+    </form>
+</brand-card>

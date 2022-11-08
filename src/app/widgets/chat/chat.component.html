@@ -1,0 +1,27 @@
+<div class="widget-chat">
+    <div gameChat class="messages">
+        <div class="messages__none" *ngIf="!messages.length">No hay mensajes, se el primero en saludar.</div>
+        <div class="messages__entry" *ngFor="let chat of messages">
+            <div class="game-layout__center">
+                <game-avatar [user]="chat.user"></game-avatar>
+                <div class="game-body__caption">{{ chat.created.toDate() | date: 'HH:mm' }}</div>
+            </div>
+            <div>
+                <h5>{{ chat.user.alias }}</h5>
+                <div>{{ chat.message }}</div>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="messageForm" (submit)="enviarMensaje()">
+        <div class="input">
+            <input placeholder="Escribe un mensaje" formControlName="message">
+            <div class="hint" [ngClass]="{ invalid: messageForm.get('message').hasError('maxlength') }">
+                {{ messageForm.get('message').value.length }} / 200
+            </div>
+        </div>
+        <button type="submit" [disabled]="messageForm.pristine || messageForm.invalid">
+            <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+        </button>
+    </form>
+</div>
