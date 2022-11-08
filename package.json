@@ -1,6 +1,9 @@
 {
     "name": "game-platform",
     "version": "0.0.0",
+    "engines": {
+        "node": "14.18.0"
+    },
     "scripts": {
         "start": "ng serve --configuration=develop",
         "build": "ng build --configuration=production",
