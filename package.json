@@ -6,7 +6,7 @@
         "npm": "8.19.1"
     },
     "scripts": {
-        "start" : "node server.js",
+        "start": "node server.js",
         "build": "ng build --configuration=production",
         "lint": "ng lint",
         "test": "npx serve dist"
