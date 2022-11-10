@@ -5,6 +5,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SETTINGS as FIRESTORE_SETTINGS } from '@angular/fire/firestore';
 
 import { CoreModule } from '@core/core.module';
 import { WidgetsModule } from '@widgets/widgets.module';
@@ -33,6 +34,10 @@ import { environment } from '../environments/environment';
     ],
     providers: [
         { provide: REGION, useValue: 'europe-west2' },
+        {
+            provide: FIRESTORE_SETTINGS,
+            useValue: { experimentalAutoDetectLongPolling: true, merge: true },
+        }
     ],
     bootstrap: [ AppComponent ],
 })
